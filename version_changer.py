@@ -42,6 +42,5 @@ def copy_files(key):
     print()
 
 
-copy_files("mods")
-copy_files("resourcepacks")
-copy_files("shaderpacks")
+for item in os.listdir(version_changer_folder):
+    copy_files(item)
