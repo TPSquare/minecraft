@@ -3,7 +3,7 @@ await TPSM.import("str", false);
 
 import FARMS from "./data/farms.js";
 import DUPS from "./data/dups.js";
-const DATA = Object.assign({}, FARMS.fully, FARMS.special, DUPS);
+const DATA = Object.assign(FARMS.fully, FARMS.special, DUPS);
 
 const DEBUG = new (class {
   constructor() {
@@ -115,4 +115,4 @@ const FUNC = new (class {
   }
 })();
 
-LOG.materials("bone", true);
+// LOG.materials("rail", true);

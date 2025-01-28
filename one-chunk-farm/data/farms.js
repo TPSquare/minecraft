@@ -267,18 +267,4 @@ export default {
     },
   },
 };
-
-// bone meal
-// cow
-// pig
-// rabbit
-// sheep
-// snowball
-// turtle
-// coal
-// chorus
-// nether wart
-// tall flower
-// cocoa
-// rail
 // wood
