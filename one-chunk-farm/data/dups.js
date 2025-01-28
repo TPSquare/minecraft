@@ -8,7 +8,7 @@ export default {
     coral_fan: 1,
     chest: 2,
     hopper: 1,
-    stone_bricks: 7,
+    block: 7,
     glass: 6,
     redstone: 5,
     _source: "https://youtu.be/3-yI_WnNgDw",

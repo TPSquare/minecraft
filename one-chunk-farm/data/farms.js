@@ -1,15 +1,15 @@
 export default {
   fully: {
-    "cooked_chicken|feather|egg": {
+    "cooked_chicken|feather": {
       chest: 2,
-      hopper: 10,
+      hopper: 4,
       dispenser: 1,
       repeater: 2,
       comparator: 1,
       redstone: 6,
-      stone_bricks: 25,
+      block: 28,
       glass: 3,
-      stone_brick_slab: 9,
+      slab: 9,
       lava_bucket: 1,
       wheat_seeds: "Auto",
       entities: { chicken: 2 },
@@ -17,6 +17,16 @@ export default {
       _length: 6,
       _width: 3,
       _height: 5,
+    },
+    egg: {
+      chest: 1,
+      hopper: 1,
+      trapdoor: 5,
+      entities: { chicken: 2 },
+      wheat_seeds: "Auto",
+      _length: 3,
+      _width: 3,
+      _height: 4
     },
     wool: {
       chest: 2,
@@ -29,7 +39,7 @@ export default {
       hopper_minecart: 1,
       redstone: 1,
       grass_block: 4,
-      stone_bricks: 9,
+      block: 9,
       entities: { sheep: 1 },
       _source: "https://youtu.be/_qjxOpel4s8",
       _length: 4,
@@ -38,13 +48,13 @@ export default {
     },
     iron: {
       bed: 5,
-      stone_brick_slab: 5,
+      slab: 5,
       torch: 2,
       chest: 2,
       hopper: 3,
-      stone_bricks: 31,
-      stone_brick_wall: 60,
-      oak_sign: 3,
+      block: 31,
+      wall: 60,
+      sign: 3,
       lava_bucket: 1,
       water_bucket: 1,
       leaves: 132,
@@ -57,9 +67,9 @@ export default {
     },
     cactus: {
       sand: 4,
-      oak_fence: 4,
+      fence: 4,
       cactus: 4,
-      stone_bricks: 92,
+      block: 92,
       glass: 26,
       chest: 2,
       hopper: 1,
@@ -74,7 +84,7 @@ export default {
       hopper: 1,
       piston: 8,
       observer: 8,
-      stone_bricks: 65,
+      block: 65,
       glass: 26,
       redstone: 8,
       bamboo: 6,
@@ -89,8 +99,8 @@ export default {
     "honeycomb|honey_bottle": {
       chest: 2,
       hopper: 2,
-      stone_bricks: 12,
-      stone_brick_slab: 6,
+      block: 12,
+      slab: 6,
       comparator: 2,
       redstone: 10,
       dispenser: 2,
@@ -108,7 +118,7 @@ export default {
       _note: "You have to ensure that there are always enough empty bottles in the dispenser.",
     },
     "potato|carrot|bread|wheat_seeds|wheat|beetroot|beetroot_seeds": {
-      stone_bricks: 86,
+      block: 86,
       hopper: 12,
       hopper_minecart: 8,
       composter: 4,
@@ -117,8 +127,8 @@ export default {
       water_bucket: 4,
       glowstone: 4,
       chest: 4,
-      oak_trapdoor: 4,
-      stone_brick_slab: 8,
+      trapdoor: 4,
+      slab: 6,
       dirt: 32,
       hoe: 1,
       carrot: 8,
@@ -132,7 +142,7 @@ export default {
       _height: 3,
     },
     kelp: {
-      stone_bricks: 24,
+      block: 24,
       glass: 2,
       chest: 2,
       hopper: 2,
@@ -145,7 +155,6 @@ export default {
       _length: 5,
       _height: 4,
       _width: 4,
-      _source: "Me!",
     },
     sweet_berries: {
       chest: 2,
@@ -154,7 +163,7 @@ export default {
       rail: 2,
       dirt: 2,
       sweet_berries: 2,
-      stone_brick_stairs: 20,
+      stairs: 20,
       glass: 22,
       oak_door: 6,
       _source: "https://youtu.be/j7gYn7OtIcc",
@@ -165,7 +174,7 @@ export default {
     },
     "red_mushroom|brown_mushroom": {
       chest: 2,
-      stone_bricks: 182,
+      block: 182,
       glass: 2,
       observer: 16,
       sticky_piston: 16,
@@ -177,7 +186,6 @@ export default {
       brown_mushroom: 4,
       red_mushroom: 4,
       podzol: 24,
-      _source: "Me!",
       _length: 13,
       _width: 6,
       _height: 6,
@@ -189,21 +197,19 @@ export default {
       chest: 8,
       glass: 8,
       magma_block: 4,
-      oak_sign: 8,
+      sign: 8,
       water_bucket: 2,
-      oak_trapdoor: 48,
-      stone_bricks: 456,
-      torch: 8,
-      _source: "Me!",
+      trapdoor: 56,
+      block: 584,
       _length: 14,
       _width: 14,
       _height: 9,
     },
     "melon_slice|pumpkin": {
-      stone_bricks: 29,
+      block: 27,
       glass: 5,
       hopper: 5,
-      chest: 2,
+      chest: 4,
       piston: 3,
       observer: 2,
       repeater: 3,
@@ -214,27 +220,25 @@ export default {
       pumpkin_seeds: 1,
       melon_seeds: 1,
       _source: "https://www.youtube.com/shorts/arNgmiK2Bl4",
+      _length: 6,
+      _width: 7,
+      _height: 2,
     },
     // slime https://youtu.be/CUUX02ASQ5g
   },
-  semi: {
-    // villager https://www.youtube.com/shorts/NEfh_Cl28Bk
-    // exp
-    // raid https://www.youtube.com/shorts/_3HLfMdBPTg
-  },
-  afk: {
+  special: {
     stone: {
-      stone_bricks: 35,
-      stone_brick_stairs: 10,
+      block: 35,
+      stairs: 10,
       hopper: 11,
       repeater: 8,
       redstone: 5,
       piston: 2,
-      oak_trapdoor: 2,
+      trapdoor: 2,
       chest: 2,
       redstone_torch: 2,
       lever: 2,
-      stone_button: 1,
+      button: 1,
       water_bucket: 2,
       lava_bucket: 1,
       _source: "https://youtu.be/O9ztGfyysNk",
@@ -243,12 +247,24 @@ export default {
       _height: 3,
       _depth: 2,
     },
-    // short grass
-    // ice https://youtu.be/4VQzDuqhvxQ
-    // obsidian https://youtu.be/Ew-97bPMYsY
-    // lava https://youtu.be/KMW7llnbx_I
-    // seagrass https://youtu.be/Fg8GuBYPZZE
-    // seapickle https://youtu.be/kOdNL7YbjxY
+    villager: {
+      block: 137,
+      composter: 1,
+      torch: 1,
+      bed: 5,
+      water_bucket: 3,
+      trapdoor: 3,
+      sign: 2,
+      dirt: 20,
+      crops: "Auto",
+      glass: 3,
+      hoe: 1,
+      entities: { villager: 2 },
+      _source: "https://youtu.be/nTy6qvDl-o8",
+      _length: 8,
+      _width: 9,
+      _height: 8,
+    },
   },
 };
 
@@ -257,7 +273,7 @@ export default {
 // pig
 // rabbit
 // sheep
-// snowball 
+// snowball
 // turtle
 // coal
 // chorus
@@ -265,3 +281,4 @@ export default {
 // tall flower
 // cocoa
 // rail
+// wood

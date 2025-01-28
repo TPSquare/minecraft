@@ -1,15 +1,34 @@
+await import("https://tpsquare.github.io/modules/js/tpsm/main.js");
+await TPSM.import("str", false);
+
 import FARMS from "./data/farms.js";
 import DUPS from "./data/dups.js";
-const DATA = Object.assign({}, FARMS.fully, FARMS.semi, FARMS.afk, DUPS);
+const DATA = Object.assign({}, FARMS.fully, FARMS.special, DUPS);
+
+const DEBUG = new (class {
+  constructor() {
+    this.dataValidation();
+  }
+  dataValidation() {
+    Object.keys(DATA).forEach((key) => {
+      const data = Object.assign(DATA[key]),
+        warn = [];
+      if (data._length == undefined || data._width == undefined || data._height == undefined)
+        warn.push("Undefined size");
+      if (data._length > 16 || data._width > 16 || (data._length > 13 && data._width > 13))
+        warn.push("Size exceeds limit");
+      if (warn.length > 0) console.warn(`[Debug] Warning: ${key}\n     ${warn.join("     \n")}\n`);
+    });
+  }
+})();
 
 const GET = new (class {
   constructor() {
     this.mList = Object.keys(DATA).length; // List of farm machines
     this.iList = []; // List of items
     Object.keys(DATA).forEach((items) => this.iList.push(...items.split("|")));
-    this.quantity = this.iList.length;
     this.stacks = {
-      1: ["water_bucket"],
+      1: ["water_bucket", "lava_bucket", "hopper_minecart"],
       16: [],
     };
   }
@@ -29,52 +48,58 @@ const GET = new (class {
     else for (const k in DATA[mKey]) if (k.charAt(0) != "_") result[k] = DATA[mKey][k];
     return result;
   }
+  products(key) {
+    return Object.keys(DATA)
+      .find((k) => k.includes(key))
+      ?.split("|")
+      .map((e) => TPSM.str.capitalization(FUNC.identiferToName(e)));
+  }
 })();
 
 const LOG = new (class {
   materials(key, stacks = false) {
-    console.log(FUNC.identiferToName(key) + ": ");
+    let result = GET.products(key).join(", ") + ": \n";
     const data = GET.materials(key, stacks);
     if (stacks)
-      console.log(
-        Object.keys(data)
-          .map((k) => {
-            const value = (() => {
-              if (k == "entities")
-                return (
-                  "\n" +
-                  Object.keys(data[k])
-                    .map((e) => `    ${FUNC.identiferToName(e)}: ${data[k][e]}`)
-                    .join("\n")
-                );
-              if (!Array.isArray(data[k])) return data[k];
-              if (!data[k][0]) return `${data[k][1]} item${FUNC.addS(data[k][1])}`;
-              if (!data[k][1]) return `${data[k][0]} stack${FUNC.addS(data[k][0])}`;
-              return [
-                `${data[k][0]} stack${FUNC.addS(data[k][0])}`,
-                  `${data[k][1]} item${FUNC.addS(data[k][1])}`,
-              ].join(" + ");
-            })();
-            return `  ${FUNC.identiferToName(k)}: ${value}`;
-          })
-          .join("\n")
-      );
-    else
-      console.log(
-        Object.keys(data)
-          .map((k) => {
+      result += Object.keys(data)
+        .map((k) => {
+          const value = (() => {
             if (k == "entities")
               return (
-                "  Entities:\n" +
+                "\n" +
                 Object.keys(data[k])
                   .map((e) => `    ${FUNC.identiferToName(e)}: ${data[k][e]}`)
                   .join("\n")
               );
-            if (!Array.isArray(data[k])) return `  ${FUNC.identiferToName(k)}: ${data[k]}`;
-            return `  ${FUNC.identiferToName(k)}: ${data[k]} item${FUNC.addS(data[k])}`;
-          })
-          .join("\n")
-      );
+            if (!Array.isArray(data[k])) return data[k];
+            if (!data[k][0]) return `${data[k][1]} item${FUNC.addS(data[k][1])}`;
+            if (!data[k][1]) return `${data[k][0]} stack${FUNC.addS(data[k][0])}`;
+            return [
+              `${data[k][0]} stack${FUNC.addS(data[k][0])}`,
+              `${data[k][1]} item${FUNC.addS(data[k][1])}`,
+            ].join(" + ");
+          })();
+          return `  ${FUNC.identiferToName(k)}: ${value}`;
+        })
+        .join("\n");
+    else
+      result += Object.keys(data)
+        .map((k) => {
+          if (k == "entities")
+            return (
+              "  Entities:\n" +
+              Object.keys(data[k])
+                .map((e) => `    ${FUNC.identiferToName(e)}: ${data[k][e]}`)
+                .join("\n")
+            );
+          if (!Array.isArray(data[k])) return `  ${FUNC.identiferToName(k)}: ${data[k]}`;
+          return `  ${FUNC.identiferToName(k)}: ${data[k]} item${FUNC.addS(data[k])}`;
+        })
+        .join("\n");
+    console.log(result);
+  }
+  products(key) {
+    console.log(GET.products(key).join(", "));
   }
 })();
 
@@ -82,7 +107,7 @@ const FUNC = new (class {
   identiferToName(identifer) {
     return identifer
       .split("_")
-      .map((e) => e.charAt(0).toUpperCase() + e.substr(1))
+      .map((e) => TPSM.str.capitalization(e))
       .join(" ");
   }
   addS(value) {
@@ -90,5 +115,4 @@ const FUNC = new (class {
   }
 })();
 
-LOG.materials("kelp", true);
-// console.log(GET.mList);
+LOG.materials("bone", true);
