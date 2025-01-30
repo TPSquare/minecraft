@@ -31,6 +31,21 @@ const GET = new (class {
       1: ["water_bucket", "lava_bucket", "hopper_minecart"],
       16: [],
     };
+
+    this.allMaterials = { entities: {} };
+    for (const farmKey in DATA)
+      for (const materialKey in DATA[farmKey]) {
+        if (materialKey.charAt(0) == "_") continue;
+        if (materialKey == "entities") {
+          for (const entityKey in DATA[farmKey][materialKey])
+            this.allMaterials.entities[entityKey] =
+              (this.allMaterials.entities[entityKey] || 0) + DATA[farmKey][materialKey][entityKey];
+          continue;
+        }
+        this.allMaterials[materialKey] = this.allMaterials[materialKey] || [0, ""];
+        if (DATA[farmKey][materialKey] == "Auto") this.allMaterials[materialKey][1] = "+";
+        else this.allMaterials[materialKey][0] += DATA[farmKey][materialKey];
+      }
   }
   materials(key, stacks = false) {
     if (!key) return;
@@ -114,5 +129,3 @@ const FUNC = new (class {
     return value == 1 ? "" : "s";
   }
 })();
-
-// LOG.materials("rail", true);
