@@ -32,15 +32,21 @@ const GET = new (class {
       16: [],
     };
 
-    this.allMaterials = { entities: {} };
+    this.allMaterials = { entities: {}, tools: [] };
     for (const farmKey in DATA)
       for (const materialKey in DATA[farmKey]) {
         if (materialKey.charAt(0) == "_") continue;
-        if (materialKey == "entities") {
-          for (const entityKey in DATA[farmKey][materialKey])
-            this.allMaterials.entities[entityKey] =
-              (this.allMaterials.entities[entityKey] || 0) + DATA[farmKey][materialKey][entityKey];
-          continue;
+        switch (materialKey) {
+          case "entities":
+            for (const entityKey in DATA[farmKey][materialKey])
+              this.allMaterials.entities[entityKey] =
+                (this.allMaterials.entities[entityKey] || 0) +
+                DATA[farmKey][materialKey][entityKey];
+            continue;
+          case "tools":
+            for (const toolKey of DATA[farmKey][materialKey])
+              if (!this.allMaterials.tools.includes(toolKey)) this.allMaterials.tools.push(toolKey);
+            continue;
         }
         this.allMaterials[materialKey] = this.allMaterials[materialKey] || [0, ""];
         if (DATA[farmKey][materialKey] == "Auto") this.allMaterials[materialKey][1] = "+";
@@ -79,13 +85,17 @@ const LOG = new (class {
       result += Object.keys(data)
         .map((k) => {
           const value = (() => {
-            if (k == "entities")
-              return (
-                "\n" +
-                Object.keys(data[k])
-                  .map((e) => `    ${FUNC.identiferToName(e)}: ${data[k][e]}`)
-                  .join("\n")
-              );
+            switch (k) {
+              case "entities":
+                return (
+                  "\n" +
+                  Object.keys(data[k])
+                    .map((e) => `    ${FUNC.identiferToName(e)}: ${data[k][e]}`)
+                    .join("\n")
+                );
+              case "tools":
+                return data[k].map((e) => FUNC.identiferToName(e)).join(", ");
+            }
             if (!Array.isArray(data[k])) return data[k];
             if (!data[k][0]) return `${data[k][1]} item${FUNC.addS(data[k][1])}`;
             if (!data[k][1]) return `${data[k][0]} stack${FUNC.addS(data[k][0])}`;
@@ -100,15 +110,22 @@ const LOG = new (class {
     else
       result += Object.keys(data)
         .map((k) => {
-          if (k == "entities")
-            return (
-              "  Entities:\n" +
-              Object.keys(data[k])
-                .map((e) => `    ${FUNC.identiferToName(e)}: ${data[k][e]}`)
-                .join("\n")
-            );
-          if (!Array.isArray(data[k])) return `  ${FUNC.identiferToName(k)}: ${data[k]}`;
-          return `  ${FUNC.identiferToName(k)}: ${data[k]} item${FUNC.addS(data[k])}`;
+          const value = (() => {
+            switch (k) {
+              case "entities":
+                return (
+                  "\n" +
+                  Object.keys(data[k])
+                    .map((e) => `    ${FUNC.identiferToName(e)}: ${data[k][e]}`)
+                    .join("\n")
+                );
+              case "tools":
+                return data[k].map((e) => FUNC.identiferToName(e)).join(", ");
+            }
+            if (!Array.isArray(data[k])) return data[k];
+            return `${data[k]} item${FUNC.addS(data[k])}`;
+          })();
+          return `  ${FUNC.identiferToName(k)}: ${value}`;
         })
         .join("\n");
     console.log(result);
