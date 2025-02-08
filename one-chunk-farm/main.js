@@ -137,6 +137,7 @@ const LOG = new (class {
 
 const FUNC = new (class {
   identiferToName(identifer) {
+    if (identifer == "tnt") return "TNT";
     return identifer
       .split("_")
       .map((e) => TPSM.str.capitalization(e))

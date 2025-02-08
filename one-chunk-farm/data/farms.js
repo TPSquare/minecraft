@@ -244,7 +244,7 @@ export default {
       _length: 4,
       _height: 7,
       _width: 10,
-    },
+    }
     // slime https://youtu.be/CUUX02ASQ5g
   },
   special: {
