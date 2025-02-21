@@ -24,7 +24,7 @@ const DEBUG = new (class {
 
 const GET = new (class {
   constructor() {
-    this.mList = Object.keys(DATA).length; // List of farm machines
+    this.mList = Object.keys(DATA); // List of farm machines
     this.iList = []; // List of items
     Object.keys(DATA).forEach((items) => this.iList.push(...items.split("|")));
     this.stacks = {
