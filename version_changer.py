@@ -3,7 +3,7 @@ import shutil
 import sys
 
 # Replace "\" with "\\"
-MINECRAFT_FOLDER = "D:\\Program Files\\MinecraftTL"
+MINECRAFT_FOLDER = "D:\\Users\\THAIPHANTHANHPHU\\AppData\\Roaming\\.minecraft"
 VERSION_CHANGER_KEY = "version_changer"
 
 version_changer_folder = os.path.join(MINECRAFT_FOLDER, VERSION_CHANGER_KEY)
